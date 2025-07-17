@@ -1,0 +1,91 @@
+import sys
+import os
+import time
+import cv2 as cv
+import config as cf
+import variables
+from colorama import Fore, Back, Style
+
+
+def main():
+    folder_json_path = sys.argv[1]
+    if(os.path.isfile(folder_json_path)):
+        json_files = [folder_json_path]
+    else:
+        # List all files in the folder
+        json_files = os.listdir(folder_json_path)
+        json_files = sorted(json_files, key=lambda x: int(''.join(filter(str.isdigit, x))))
+
+    for i in range(1,len(json_files)+1):
+        if(os.path.isfile(folder_json_path)):
+            config = json_files[i-1]
+        else:
+            config = os.path.join(folder_json_path, json_files[i-1])
+
+        variables.config = cf.Config(config)
+        # Set the correct Mitsuba variant
+        import mitsuba as mi
+        if variables.config.use_gpu:
+            mi.set_variant("cuda_ad_rgb")
+        else:
+            mi.set_variant("scalar_rgb")
+
+        # Optional debug prints
+        print(Fore.CYAN + f"[DEBUG] Mitsuba active variant: {mi.variant()}" + Style.RESET_ALL)
+        print(Fore.CYAN + f"[DEBUG] Available variants: {mi.variants()}" + Style.RESET_ALL) 
+        import output
+        
+        if variables.config.output_type == "animation_video":
+            if variables.config.results_name == "":
+                results_name = "video.avi"
+            else:
+                results_name = variables.config.results_name
+
+            output.AnimationVideo(variables.config.results_folder, "frames" + str(i) + "/", results_name, variables.config.rotation_degrees)
+            video=cv.VideoWriter(variables.config.results_folder + results_name, cv.VideoWriter_fourcc(*'XVID'), variables.config.fps, (variables.config.width,variables.config.width))
+            
+            folder_path = variables.config.results_folder + "frames" + str(i) + "/"
+
+            # List all files in the folder
+            files = os.listdir(folder_path)
+            files = sorted(files, key=lambda x: int(''.join(filter(str.isdigit, x))))
+
+            for file in files:
+                file_path = os.path.join(folder_path, file)
+                video.write(cv.imread(file_path))
+
+            video.release()
+        
+        elif variables.config.output_type == "rotation_video":
+            if variables.config.results_name == "":
+                results_name = "video.avi"
+            else:
+                results_name = variables.config.results_name
+
+            output.RotationVideo(variables.config.results_folder, "frames" + str(i) + "/", results_name)
+            video=cv.VideoWriter(variables.config.results_folder + results_name, cv.VideoWriter_fourcc(*'XVID'), variables.config.fps, (variables.config.width,variables.config.width))
+            
+            folder_path = variables.config.results_folder + "frames" + str(i) + "/"
+
+            # List all files in the folder
+            files = os.listdir(folder_path)
+            files = sorted(files, key=lambda x: int(''.join(filter(str.isdigit, x))))
+
+            for file in files:
+                file_path = os.path.join(folder_path, file)
+                video.write(cv.imread(file_path))
+
+            video.release()
+        
+        elif variables.config.output_type == "image":
+            if variables.config.results_name == "":
+                results_name = "result.png"
+            else:
+                results_name = variables.config.results_name
+                
+            output.ImageOutput(variables.config.results_folder, results_name, variables.config.rotation_degrees)
+    
+if __name__ == "__main__":
+    start_time = time.time()
+    main()
+    print(Fore.LIGHTGREEN_EX + "Rendering completed in %s seconds" % (time.time() - start_time) + Style.RESET_ALL)

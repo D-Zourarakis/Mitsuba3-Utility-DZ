@@ -1,0 +1,51 @@
+{
+  "use_gpu": true,
+  "output": {
+    "type": "image",
+    "results_folder": "",
+    "rotation_degrees": 0,
+    "rotation_step": 1,
+    "width": 512,
+    "height": 512,
+    "fps": 5,
+    "target": "auto",
+    "distance": "auto",
+    "seed": 0,
+    "fov": 45,
+    "samples_per_pixel": 224,
+    "up_axis": [0,0,1],
+    "camera_axis": [0,1,0],
+    "rotation_axis": [0,1,0],
+    "add_floor": true,
+    "floor_type": "diffuse",
+    "floor_color": [0.9, 0.5, 0.9],
+    "add_background": true,
+    "background_type": "diffuse",
+    "background_color": [1, 0.5, 0.5]
+  },
+  "objects": [
+    {
+      "filename": "obj_files/cylinder.obj",
+      "type": "obj",
+      "material": {
+        "type": "diffuse",
+        "reflectance": {
+            "type": "bitmap",
+            "filename": "textures/wood.jpg"
+        }
+      }
+    }
+  ],
+  "lights": [
+    {
+      "emitter_type": "area",
+      "emitter_shape": "rectangle",
+      "position": "top-center",
+      "rotation_axis": [0,1,0],
+      "rotation_degrees": -110,
+      "size": "medium",
+      "distance_from_object": "small",
+      "radiance": 10
+    }
+  ]
+}

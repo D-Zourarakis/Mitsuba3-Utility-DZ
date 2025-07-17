@@ -1,0 +1,40 @@
+{
+  "use_gpu": true,
+  "output": {
+    "type": "image",
+    "rotation_axis": [0,1,0],
+    "rotation_degrees": 180,
+    "rotation_step":10,
+    "fov": 45,
+    "up_axis": [0,0,1],
+    "width": 512,
+    "height": 512,
+    "samples_per_pixel": 1024,
+    "seed": 0,
+    "add_floor": true,
+    "add_background": true,
+    "background_type": "diffuse",
+    "background_color": [0.1, 0.25, 0.3]
+  },
+  "objects": [
+    {
+      "filename": "obj_files/cylinder.obj",
+      "type":"obj",
+      "material": {
+        "type": "glass",
+        "color": [0.871, 0.804, 0.961]
+      }
+    }
+  ],
+  "lights": [
+    {
+      "name": "light5",
+      "emitter_type": "area",
+      "emitter_shape": "sphere",
+      "position": "top-left",
+      "radiance": 100,
+      "distance_from_object": "large",
+      "size": "large"
+    }
+  ]
+}
