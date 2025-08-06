@@ -69,13 +69,11 @@ E.	Test the Batch Files
 &nbsp;	b.	Run either the runme\_photobooth.bat or runme\_photobooth2.bat
 
 F. Running Different Versions Of The Rendering
-	If your Computer has a Graphics Card (GPU) you should run the Gpu Version (CUDA) of the rendering scripts
-		runme_photobooth_GPU.bat // runme_photobooth2_GPU.bat
-	If you do not have a GPU and experiencing errors with CUDA Rendering then you should run the Cpu Version (Scalar_RGB) instead
-		runme_photobooth_CPU.bat // runme_photobooth2_CPU.bat
+	If your Computer has a Graphics Card (GPU) you should run the Gpu Version (CUDA) of the rendering scripts :	runme_photobooth_GPU.bat // runme_photobooth2_GPU.bat
+	If you do not have a GPU and experiencing errors with CUDA Rendering then you should run the Cpu Version (Scalar_RGB) instead : runme_photobooth_CPU.bat // runme_photobooth2_CPU.bat
+
 G Results
-	After Rendering process completes the output images will be saved in photobooth_cpu\ or photobooth_gpu\
-	photobooth2_cpu\ or photobooth2_gpu based on your rendering Choice. 
+	After Rendering process completes the output images will be saved in photobooth_cpu\ or photobooth_gpu\photobooth2_cpu\ or photobooth2_gpu based on your rendering Choice. 
 	Check for files with names output_000.png, output_.....
 
 
