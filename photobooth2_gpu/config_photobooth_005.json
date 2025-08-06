@@ -1,0 +1,38 @@
+{
+"use_gpu": true,
+"disable_cpu_parallelization":false,
+"output": {
+    "type": "image",
+	"rotation_axis": [1,0,0],
+    "rotation_degrees": 0,
+    "rotation_step": 0,
+	"fov": 30,
+	"up_axis": [0,1,0],
+    "camera_axis": [0,0.25,1],
+    "width": 512,
+    "height": 512,
+	
+	"samples_per_pixel": 11342,
+    "seed": 0,
+    
+    "target": [0,10,0],
+    "distance": 200,
+    
+    "add_floor": false,
+    "add_background": false,
+	"results_folder": "photobooth2_gpu/",
+    "results_filename": "output_005.png"
+  },
+  "objects": [
+    {"filename":"photobooth_gpu/photobooth_part_000.obj","type":"obj","material":{"type":"diffuse","reflectance":{"type":"rgb","value":[1,1,1]}}},
+	{"filename":"photobooth_gpu/photobooth_part_001.obj","type":"obj","material":{"type":"diffuse","reflectance":{"type":"rgb","value":[1,1,1]}}},
+	{"filename":"photobooth2_gpu/input_with_texture.obj","type":"obj",
+	"material":{"type":"diffuse","reflectance":{"type":"bitmap","filename":"photobooth2_gpu/texturemap.jpg"}}	
+	}
+  ],
+  "lights": [
+    {"emitter_type":"area","emitter_shape":"sphere","position":[0,600,0],"size":[200,200,200],"radiance":3},
+    {"emitter_type":"area","emitter_shape":"sphere","position":[460,600,0],"size":[200,200,200],"radiance":3},
+    {"emitter_type":"area","emitter_shape":"sphere","position":[-460,600,0],"size":[200,200,200],"radiance":3}
+  ]
+}
